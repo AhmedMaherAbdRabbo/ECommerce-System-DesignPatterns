@@ -9,5 +9,29 @@ package ecommerce.system;
  * @author DELL
  */
 public class PaymentGateway {
+    private static PaymentGateway instance;
+
+    private PaymentGateway() {
+        
+    }
+
+    public static PaymentGateway getInstance() {
+        if (instance == null) {
+            instance = new PaymentGateway();
+        }
+        return instance;
+    }
+
+    public boolean processCreditCard(String cardNumber, double amount) {
+        return validatePayment(amount);
+    }
+
+    public boolean processPayPal(String email, double amount) {
+        return validatePayment(amount);
+    }
+
+    private boolean validatePayment(double amount) {
+        return amount > 0;
+    }
     
 }
