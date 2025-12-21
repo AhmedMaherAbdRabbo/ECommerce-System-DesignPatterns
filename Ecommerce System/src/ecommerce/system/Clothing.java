@@ -33,5 +33,9 @@ public class Clothing extends Product{
     return "Size: " + size + ", Material: " + material;
     }
 
+    public Product clone(){
+        
+        return new Clothing(this.size, this.material, this.name, this.price, this.category, this.stock) ;
     
+    }
 }

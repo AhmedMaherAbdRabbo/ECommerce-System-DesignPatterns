@@ -34,4 +34,9 @@ public class HomeAppliance extends Product {
     }
 
     
+    public Product clone(){
+    
+        return new HomeAppliance(this.powerConsumption, this.energyRating, this.name, this.price, this.category, this.stock);
+    }
+    
 }

@@ -37,5 +37,6 @@ public abstract class Product {
     
     public abstract String getDetails(); 
     
+    public abstract Product clone();
     
 }

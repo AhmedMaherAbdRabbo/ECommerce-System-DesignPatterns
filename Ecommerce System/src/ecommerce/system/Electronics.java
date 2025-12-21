@@ -32,6 +32,19 @@ public class Electronics extends Product{
     public void setBrand(String brand) {
         this.brand = brand;
     }
+
+    @Override
+    public Product clone() {
+        return new Electronics(
+                this.warranty , 
+                this.brand , 
+                this.name , 
+                this.price ,
+                this.category , 
+                this.stock 
+        ); 
+    }
+    
     
 
 }
