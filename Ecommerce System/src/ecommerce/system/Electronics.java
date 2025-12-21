@@ -1,13 +1,37 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package ecommerce.system;
 
-/**
- *
- * @author DELL
- */
-public class Electronics {
+public class Electronics extends Product{
     
+    private String warranty; // الضمان
+    private String brand;
+
+    public Electronics(String warranty, String brand, String name, double price, String category, int stock) {
+        super(name, price, category, stock);
+        this.warranty = warranty;
+        this.brand = brand;
+    }
+    
+    @Override
+    public String getDetails() {
+    return "Brand: " + brand + ", Warranty: " + warranty;
+    }
+
+    public String getWarranty() {
+        return warranty;
+    }
+
+    public void setWarranty(String warranty) {
+        this.warranty = warranty;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+    
+
 }
