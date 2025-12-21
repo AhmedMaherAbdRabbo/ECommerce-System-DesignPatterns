@@ -8,6 +8,13 @@ package ecommerce.system;
  *
  * @author DELL
  */
+
+import ecommerce.system.Order;
+
 public interface OrderProcessor {
+    
+    void processOrder(Order order);
+    double calculateShippingCost(Order order);
+    String getEstimatedDelivery();
     
 }

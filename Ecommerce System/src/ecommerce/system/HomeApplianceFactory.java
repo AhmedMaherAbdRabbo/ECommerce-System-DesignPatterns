@@ -8,6 +8,22 @@ package ecommerce.system;
  *
  * @author DELL
  */
-public class HomeApplianceFactory {
+
+import ecommerce.system.Product;
+import ecommerce.system.HomeAppliance;
+
+public class HomeApplianceFactory implements ProductFactory {
+    private int powerConsumption;
+    private String energyRating;
+    
+    public HomeApplianceFactory(int powerConsumption, String energyRating) {
+        this.powerConsumption = powerConsumption;
+        this.energyRating = energyRating;
+    }
+    
+    @Override
+    public Product createProduct(String name, double price, int stock) {
+        return new HomeAppliance(powerConsumption, energyRating, name, price, "Home Appliance", stock);
+    }
     
 }

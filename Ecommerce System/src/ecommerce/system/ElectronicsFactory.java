@@ -8,6 +8,23 @@ package ecommerce.system;
  *
  * @author DELL
  */
-public class ElectronicsFactory {
+
+
+import ecommerce.system.Product;
+import ecommerce.system.Electronics;
+
+
+public class ElectronicsFactory implements ProductFactory {
+    private String warranty;
+    private String brand;
     
+    public ElectronicsFactory(String warranty, String brand) {
+        this.warranty = warranty;
+        this.brand = brand;
+    }
+    
+    @Override
+    public Product createProduct(String name, double price, int stock) {
+        return new Electronics(warranty, brand, name, price, "Electronics", stock);
+    }
 }

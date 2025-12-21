@@ -10,4 +10,22 @@ package ecommerce.system;
  */
 public class OrderProcessorFactory {
     
+    public static OrderProcessor getProcessor(String deliveryType) {
+                
+        if (deliveryType == null) {
+            return new StandardOrderProcessor();
+        }
+        
+        switch(deliveryType.toLowerCase()) {
+            case "express":
+                return new ExpressOrderProcessor();
+            
+            case "standard":
+                return new StandardOrderProcessor();
+            
+            default:
+                return new StandardOrderProcessor();
+        }
+    }
+    
 }

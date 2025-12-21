@@ -9,5 +9,7 @@ package ecommerce.system;
  * @author DELL
  */
 public interface ProductFactory {
+
+    Product createProduct(String name, double price, int stock);
     
 }
