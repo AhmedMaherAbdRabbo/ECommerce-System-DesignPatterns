@@ -1,13 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package ecommerce.system;
 
-/**
- *
- * @author DELL
- */
+import java.util.ArrayList;
+import java.util.List;
+
 public class CartManager {
     
     private static CartManager instance;
@@ -34,10 +30,13 @@ public class CartManager {
     }
 
     
-    public void removeItem(int productId) {
-        cartItems.removeIf(
-            item -> item.getProduct().getProductId() == productId
-        );
+    public void removeItem(int productName) {
+        for (CartItem item : cartItems) {
+        if (item.getProduct().getName().equals(productName)) {
+            cartItems.remove(item);
+            break; 
+        }
+    }
     }
 
     public List<CartItem> getCartItems() {
