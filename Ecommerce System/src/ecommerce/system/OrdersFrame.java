@@ -4,7 +4,6 @@
  */
 package ecommerce.system;
 
-import frontend.*;
 
 /**
  *
