@@ -1,13 +1,30 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package ecommerce.system;
 
-/**
- *
- * @author DELL
- */
-public class GiftWrapDecorator {
+public class GiftWrapDecorator extends BaseProductDecorator{
+    
+    private double wrapCost = 75;
+    private String style; 
+
+    public GiftWrapDecorator(Product product , String style) {
+        super(product);
+        this.style = style;
+    }
+
+    @Override
+    public String getDetails() {
+        return product_decrator.getDetails() + ", Gift Wrap (" + style + ")"; 
+    }
+
+    @Override
+    public double getPrice() {
+        return product_decrator.getPrice() + wrapCost; 
+    }
+
+    
+    public Product clone(){
+       return new GiftWrapDecorator(product_decrator.clone(), this.style);
+    }
+    
     
 }
