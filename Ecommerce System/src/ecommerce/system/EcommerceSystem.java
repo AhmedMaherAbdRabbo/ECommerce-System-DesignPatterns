@@ -1,13 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
+
 package ecommerce.system;
 
-/**
- *
- * @author DELL
- */
+
 public class EcommerceSystem {
 
     /**
@@ -32,6 +26,18 @@ public class EcommerceSystem {
 
          System.out.println(laptop.getPrice());
          System.out.println(laptop.getDetails());
+         
+         
+         Customer customer = new Customer("Ali", "ali@gmail.com", "Cairo");
+
+        Order order = new OrderBuilder()
+        .setCustomer(customer)
+        .setDeliveryType("Express")
+        .setPaymentMethod("Credit Card")
+        .setShippingAddress("123 Main St, Cairo")
+        .build();
+        
+      
         
     }
     
