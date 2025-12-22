@@ -1,12 +1,11 @@
 
 package ecommerce.system;
 
+import java.util.List;
+
 
 public class EcommerceSystem {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         // TODO code application logic here
         
@@ -29,16 +28,20 @@ public class EcommerceSystem {
          
          
          Customer customer = new Customer("Ali", "ali@gmail.com", "Cairo");
-
+         
+         // 
         Order order = new OrderBuilder()
-        .setCustomer(customer)
-        .setDeliveryType("Express")
-        .setPaymentMethod("Credit Card")
-        .setShippingAddress("123 Main St, Cairo")
-        .build();
+            .setCustomer(customer)
+            .setDeliveryType("Express")
+            .setPaymentMethod("Credit Card")
+            .setShippingAddress("123 Main St, Cairo")
+            .build(); 
         
-      
         
     }
-    
 }
+
+        
+   
+    
+

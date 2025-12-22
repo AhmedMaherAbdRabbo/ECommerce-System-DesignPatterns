@@ -1,13 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
+
 package ecommerce.system;
 
-/**
- *
- * @author DELL
- */
+import java.util.List;
+
 public interface CartObserver {
-    
+   
+    public abstract void update(List<CartItem> items, double total);
 }
