@@ -16,7 +16,159 @@ public class AddProductFrame extends javax.swing.JFrame {
      */
     public AddProductFrame() {
         initComponents();
+        
+        AddProductbt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddProductbtActionPerformed(evt);
+            }
+        });
     }
+    
+    
+    private void AddProductbtActionPerformed(java.awt.event.ActionEvent evt) {
+        try {
+            String name = nameTF.getText().trim();
+            String priceText = priceTF.getText().trim();
+            String stockText = stockTF.getText().trim();
+            String category = (String) jComboBox1.getSelectedItem();
+            
+            if (name.isEmpty() || priceText.isEmpty() || stockText.isEmpty() 
+                || category.equals("choose")) {
+                javax.swing.JOptionPane.showMessageDialog(this, 
+                    "Please fill all required fields (name, price, stock, category)!", 
+                    "Error", 
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+            double price = Double.parseDouble(priceText);
+            int stock = Integer.parseInt(stockText);
+            
+            if (price <= 0 || stock < 0) {
+                javax.swing.JOptionPane.showMessageDialog(this, 
+                    "Price must be positive and stock cannot be negative!", 
+                    "Error", 
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+            Product newProduct = null;
+            
+            switch (category.toLowerCase()) {
+                case "electronics":
+                    String warranty = warrantyTF.getText().trim();
+                    String brand = brandTF.getText().trim();
+                    
+                    if (warranty.isEmpty() || brand.isEmpty()) {
+                        javax.swing.JOptionPane.showMessageDialog(this, 
+                            "Electronics needs: Warranty & Brand!", 
+                            "Error", 
+                            javax.swing.JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                    
+                    newProduct = ProductFactoryProvider.getFactory(
+                        category, name, price, stock, warranty, brand
+                    );
+                    break;
+                    
+                case "clothing":
+                    String size = sizeTF.getText().trim();
+                    String material = materialTF.getText().trim();
+                    
+                    if (size.isEmpty() || material.isEmpty()) {
+                        javax.swing.JOptionPane.showMessageDialog(this, 
+                            "Clothing needs: Size & Material!", 
+                            "Error", 
+                            javax.swing.JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                    
+                    newProduct = ProductFactoryProvider.getFactory(
+                        category, name, price, stock, size, material
+                    );
+                    break;
+                    
+                case "homeapp":
+                    String powerConsumption = powerConsumptionTF.getText().trim();
+                    String energyRating = energyRatingTF.getText().trim();
+                    
+                    if (powerConsumption.isEmpty() || energyRating.isEmpty()) {
+                        javax.swing.JOptionPane.showMessageDialog(this, 
+                            "Home Appliance needs: Power Consumption & Energy Rating!", 
+                            "Error", 
+                            javax.swing.JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                    
+                    newProduct = ProductFactoryProvider.getFactory(
+                        "home appliance", name, price, stock, 
+                        powerConsumption, energyRating
+                    );
+                    break;
+                    
+                default:
+                    javax.swing.JOptionPane.showMessageDialog(this, 
+                        "Please select a valid category!", 
+                        "Error", 
+                        javax.swing.JOptionPane.ERROR_MESSAGE);
+                    return;
+            }
+            
+            if (newProduct != null) {
+                Product.addProduct(newProduct);
+                
+                javax.swing.JOptionPane.showMessageDialog(this, 
+                    "Product Added Successfully!\n\n" +
+                    "Product: " + name + "\n" +
+                    "Price: $" + price + "\n" +
+                    "Stock: " + stock + "\n" +
+                    "Category: " + category + "\n\n" +
+                    "Total Products in System: " + Product.getAllProducts().size(), 
+                    "Success", 
+                    javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                
+                clearFields();
+            }
+            
+        } catch (NumberFormatException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "Please enter valid numbers!\n" +
+                "Price and Stock must be numbers.", 
+                "Error", 
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+        } catch (IllegalArgumentException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "Error: " + e.getMessage(), 
+                "Error", 
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "Unexpected Error: " + e.getMessage(), 
+                "Error", 
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+    }
+    
+    private void clearFields() {
+        nameTF.setText("");
+        priceTF.setText("");
+        stockTF.setText("");
+        jComboBox1.setSelectedIndex(0);
+        
+        warrantyTF.setText("");
+        brandTF.setText("");
+        
+        sizeTF.setText("");
+        materialTF.setText("");
+        
+        powerConsumptionTF.setText("");
+        energyRatingTF.setText("");
+        
+        nameTF.requestFocus();
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -39,7 +191,7 @@ public class AddProductFrame extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        Addtocart = new javax.swing.JButton();
+        AddProductbt = new javax.swing.JButton();
         nameTF = new javax.swing.JTextField();
         stockTF = new javax.swing.JTextField();
         priceTF = new javax.swing.JTextField();
@@ -151,9 +303,9 @@ public class AddProductFrame extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("stock :");
 
-        Addtocart.setBackground(new java.awt.Color(55, 53, 62));
-        Addtocart.setForeground(new java.awt.Color(255, 255, 255));
-        Addtocart.setText("Add to cart");
+        AddProductbt.setBackground(new java.awt.Color(55, 53, 62));
+        AddProductbt.setForeground(new java.awt.Color(255, 255, 255));
+        AddProductbt.setText("Add Product");
 
         brand.setFont(new java.awt.Font("Segoe UI Emoji", 3, 18)); // NOI18N
         brand.setForeground(new java.awt.Color(255, 255, 255));
@@ -223,7 +375,7 @@ public class AddProductFrame extends javax.swing.JFrame {
                         .addGap(0, 170, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, catTFLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(Addtocart, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(AddProductbt, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(33, 33, 33))))
         );
         catTFLayout.setVerticalGroup(
@@ -270,7 +422,7 @@ public class AddProductFrame extends javax.swing.JFrame {
                     .addComponent(powerConsumptionTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(size2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(51, 51, 51)
-                .addComponent(Addtocart, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(AddProductbt, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(45, Short.MAX_VALUE))
         );
 
@@ -369,7 +521,7 @@ public class AddProductFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddProduct;
-    private javax.swing.JButton Addtocart;
+    private javax.swing.JButton AddProductbt;
     private javax.swing.JButton MyAccount;
     private javax.swing.JButton MyCart;
     private javax.swing.JButton Orders;

@@ -18,6 +18,7 @@ public class ProductFactoryProvider {
                 return new Clothing(name , price , category , stock,  spec1, spec2);
             
             case "home appliance":
+            case "homeapp":
                 int power = Integer.parseInt(spec1);
                 return new HomeAppliance(name , price , category , stock,  spec1, spec2);
             
