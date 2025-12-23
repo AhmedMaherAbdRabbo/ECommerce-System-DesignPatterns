@@ -6,7 +6,7 @@ public class Clothing extends Product{
     private String size;
     private String material;
 
-    public Clothing(String size, String material, String name, double price, String category, int stock) {
+    public Clothing(String name, double price, String category, int stock , String size, String material) {
         super(name, price, category, stock);
         this.size = size;
         this.material = material;
@@ -35,7 +35,7 @@ public class Clothing extends Product{
 
     public Product clone(){
         
-        return new Clothing(this.size, this.material, this.name, this.price, this.category, this.stock) ;
+        return new Clothing( this.name, this.price, this.category, this.stock, this.size, this.material) ;
     
     }
 }

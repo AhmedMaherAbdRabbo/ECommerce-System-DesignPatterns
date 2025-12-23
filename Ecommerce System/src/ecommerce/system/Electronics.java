@@ -6,7 +6,7 @@ public class Electronics extends Product{
     private String warranty; // الضمان
     private String brand;
 
-    public Electronics(String warranty, String brand, String name, double price, String category, int stock) {
+    public Electronics(String name, double price, String category, int stock , String warranty, String brand) {
         super(name, price, category, stock);
         this.warranty = warranty;
         this.brand = brand;
@@ -36,12 +36,12 @@ public class Electronics extends Product{
     @Override
     public Product clone() {
         return new Electronics(
-                this.warranty , 
-                this.brand , 
                 this.name , 
                 this.price ,
                 this.category , 
-                this.stock 
+                this.stock , 
+                this.warranty , 
+                this.brand 
         ); 
     }
     

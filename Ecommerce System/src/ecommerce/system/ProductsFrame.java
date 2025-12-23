@@ -14,8 +14,39 @@ public class ProductsFrame extends javax.swing.JFrame {
     /**
      * Creates new form Products
      */
+    
+    Product p1 ;     
+    Product p2 ;
+    Product p3 ; 
+    Product p4 ;
+
     public ProductsFrame() {
         initComponents();
+        p1 =  ProductFactoryProvider.getFactory("home appliance","Washing Machine" , 8500 , 12 ,"1500" , "a++") ;      
+        p2 = ProductFactoryProvider.getFactory("electronics","laptop" , 35000 , 3 ,"00" , "+") ; 
+        p3 = ProductFactoryProvider.getFactory("clothing","jaket" , 850 , 5 ,"15" , "a++") ;
+        p4 = ProductFactoryProvider.getFactory("home appliance","Refrigerator" , 1200 , 2 ,"450" , "a+") ;
+        
+        name1.setText(p1.getName());
+        price1.setText(Double.toString(p1.getPrice()));
+        stock1.setText(Integer.toString(p1.getStock()));
+//        s11.setText(p1.getPowerConsumption()); 
+//        s21.setText(p1.getEnergyRating()); 
+//        
+        
+        name2.setText(p2.getName());
+        price2.setText(Double.toString(p2.getPrice()));
+        stock2.setText(Integer.toString(p2.getStock())); 
+        
+        
+        name3.setText(p2.getName());
+        price3.setText(Double.toString(p2.getPrice()));
+        stock3.setText(Integer.toString(p2.getStock()));
+        
+        name4.setText(p2.getName());
+        price4.setText(Double.toString(p2.getPrice()));
+        stock4.setText(Integer.toString(p2.getStock()));
+ 
     }
 
     /**

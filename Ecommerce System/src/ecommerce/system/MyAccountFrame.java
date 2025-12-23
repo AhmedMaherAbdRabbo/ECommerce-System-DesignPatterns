@@ -14,6 +14,8 @@ public class MyAccountFrame extends javax.swing.JFrame {
     /**
      * Creates new form MyAccount
      */
+    
+    static Customer customer ;  
     public MyAccountFrame() {
         initComponents();
     }
@@ -44,7 +46,6 @@ public class MyAccountFrame extends javax.swing.JFrame {
         JtxtُُEmail = new javax.swing.JTextField();
         JtxtPhone = new javax.swing.JTextField();
         JtxtAddress = new javax.swing.JTextField();
-        btnEdit = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -134,33 +135,21 @@ public class MyAccountFrame extends javax.swing.JFrame {
 
         txtPhone.setText("Phone: ");
 
-        JtxtName.setText("Abdalla Mohamed ");
         JtxtName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JtxtNameActionPerformed(evt);
             }
         });
 
-        JtxtُُEmail.setText("abdalla@mail.com ");
         JtxtُُEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JtxtُُEmailActionPerformed(evt);
             }
         });
 
-        JtxtPhone.setText("011555805500");
         JtxtPhone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JtxtPhoneActionPerformed(evt);
-            }
-        });
-
-        JtxtAddress.setText("Cairo, Egypt");
-
-        btnEdit.setText("Edit Profile");
-        btnEdit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditActionPerformed(evt);
             }
         });
 
@@ -177,6 +166,9 @@ public class MyAccountFrame extends javax.swing.JFrame {
             ProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ProfilePanelLayout.createSequentialGroup()
                 .addGroup(ProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ProfilePanelLayout.createSequentialGroup()
+                        .addGap(67, 67, 67)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(ProfilePanelLayout.createSequentialGroup()
                         .addGap(29, 29, 29)
                         .addGroup(ProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -195,16 +187,9 @@ public class MyAccountFrame extends javax.swing.JFrame {
                             .addGroup(ProfilePanelLayout.createSequentialGroup()
                                 .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(JtxtAddress))))
-                    .addGroup(ProfilePanelLayout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(70, 70, 70)
-                        .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(ProfilePanelLayout.createSequentialGroup()
-                        .addGap(67, 67, 67)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(155, Short.MAX_VALUE))
+                                .addComponent(JtxtAddress))
+                            .addComponent(btnSave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(313, Short.MAX_VALUE))
         );
         ProfilePanelLayout.setVerticalGroup(
             ProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -227,11 +212,9 @@ public class MyAccountFrame extends javax.swing.JFrame {
                 .addGroup(ProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(JtxtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addGroup(ProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEdit)
-                    .addComponent(btnSave))
-                .addContainerGap(184, Short.MAX_VALUE))
+                .addGap(33, 33, 33)
+                .addComponent(btnSave)
+                .addContainerGap(179, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -243,7 +226,7 @@ public class MyAccountFrame extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(ProfilePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(268, Short.MAX_VALUE))
+                .addContainerGap(110, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -303,15 +286,15 @@ public class MyAccountFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_JtxtُُEmailActionPerformed
 
-    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-                 
-   
-
-    }//GEN-LAST:event_btnEditActionPerformed
-
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
   
-        // ممكن تضيف JOptionPane
+        // ممكن تضيف JOptionPan
+        String name = JtxtName.getText();
+        String email = JtxtُُEmail.getText();
+        String phone = JtxtPhone.getText();
+        String address = JtxtAddress.getText();
+         customer = new Customer(name , email , address , phone);
+         
     }//GEN-LAST:event_btnSaveActionPerformed
 
     /**
@@ -361,7 +344,6 @@ public class MyAccountFrame extends javax.swing.JFrame {
     private javax.swing.JButton Orders;
     private javax.swing.JButton Products;
     private javax.swing.JPanel ProfilePanel;
-    private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnSave;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;

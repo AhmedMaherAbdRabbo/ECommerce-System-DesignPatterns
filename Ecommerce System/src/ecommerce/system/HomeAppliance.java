@@ -3,20 +3,20 @@ package ecommerce.system;
 
 public class HomeAppliance extends Product {
     
-    private int powerConsumption; // 
+    private String powerConsumption; // 
     private String energyRating;
 
-    public HomeAppliance(int powerConsumption, String energyRating, String name, double price, String category, int stock) {
+    public HomeAppliance(String name, double price, String category, int stock , String powerConsumption, String energyRating) {
         super(name, price, category, stock);
         this.powerConsumption = powerConsumption;
         this.energyRating = energyRating;
     }
 
-    public int getPowerConsumption() {
+    public String getPowerConsumption() {
         return powerConsumption;
     }
 
-    public void setPowerConsumption(int powerConsumption) {
+    public void setPowerConsumption(String powerConsumption) {
         this.powerConsumption = powerConsumption;
     }
 
@@ -36,7 +36,7 @@ public class HomeAppliance extends Product {
     
     public Product clone(){
     
-        return new HomeAppliance(this.powerConsumption, this.energyRating, this.name, this.price, this.category, this.stock);
+        return new HomeAppliance( this.name, this.price, this.category, this.stock , this.powerConsumption, this.energyRating);
     }
     
 }
