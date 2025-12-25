@@ -110,19 +110,16 @@ public class CustomizeYourProductFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         boolean isGift = GiftWrapCheckBox.isSelected();
         boolean isPremium = PremiumPackageCheckBox.isSelected();
-        
+        Product p_cloned = product.clone();
         if (isGift) {
-////         ProductsFrame.isGift =true ; 
-//         pf.gift1();
-            product = new GiftWrapDecorator(product);
+            p_cloned = new GiftWrapDecorator(p_cloned);
         }
         if(isPremium) {
-//         ProductsFrame.isPremium = false;
-//         pf.premiem(); 
-            product = new PremiumPackageDecorator(product);
+
+            p_cloned = new PremiumPackageDecorator(p_cloned);
         } 
         
-        ProductsFrame pf = new ProductsFrame(product);
+        ProductsFrame pf = new ProductsFrame(p_cloned);
         this.dispose();
         pf.setVisible(true);
     }//GEN-LAST:event_ApplyActionPerformed

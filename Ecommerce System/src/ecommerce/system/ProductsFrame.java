@@ -42,15 +42,11 @@ public class ProductsFrame extends javax.swing.JFrame {
     public ProductsFrame(Product p)
     {
         initComponents();
-        this.p1 = p;
-        displayProduct1(p1);
-        displayProduct2(p2);        
-        displayProduct3(p3);
-        displayProduct4(p3);
-
-        
-
-    
+//        this.p1 = p;
+        displayProduct1(p);
+//        displayProduct2(p2);        
+//        displayProduct3(p3);
+//        displayProduct4(p3);
     }
     private void loadProducts() {
     ArrayList<Product> products = Product.getAllProducts();
@@ -1506,14 +1502,20 @@ private void hideProduct4() {
 
     private void custom2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custom2ActionPerformed
         // TODO add your handling code here:
+        this.dispose();
+        new CustomizeYourProductFrame(p2).setVisible(true);
     }//GEN-LAST:event_custom2ActionPerformed
 
     private void custom3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custom3ActionPerformed
         // TODO add your handling code here:
+        this.dispose();
+        new CustomizeYourProductFrame(p3).setVisible(true);
     }//GEN-LAST:event_custom3ActionPerformed
 
     private void custom4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custom4ActionPerformed
         // TODO add your handling code here:
+        this.dispose();
+        new CustomizeYourProductFrame(p1).setVisible(true);
     }//GEN-LAST:event_custom4ActionPerformed
 
     private void Addtocart111ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Addtocart111ActionPerformed
