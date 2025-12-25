@@ -4,6 +4,9 @@
  */
 package ecommerce.system;
 
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -21,33 +24,162 @@ public class ProductsFrame extends javax.swing.JFrame {
     Product p4 ;
 
     public ProductsFrame() {
-        initComponents();
-        p1 =  ProductFactoryProvider.getFactory("home appliance","Washing Machine" , 8500 , 12 ,"1500" , "a++") ;      
-        p2 = ProductFactoryProvider.getFactory("electronics","laptop" , 35000 , 3 ,"00" , "+") ; 
-        p3 = ProductFactoryProvider.getFactory("clothing","jaket" , 850 , 5 ,"15" , "a++") ;
-        p4 = ProductFactoryProvider.getFactory("home appliance","Refrigerator" , 1200 , 2 ,"450" , "a+") ;
-        
-        name1.setText(p1.getName());
-        price1.setText(Double.toString(p1.getPrice()));
-        stock1.setText(Integer.toString(p1.getStock()));
-//        s11.setText(p1.getPowerConsumption()); 
-//        s21.setText(p1.getEnergyRating()); 
-//        
-        
-        name2.setText(p2.getName());
-        price2.setText(Double.toString(p2.getPrice()));
-        stock2.setText(Integer.toString(p2.getStock())); 
-        
-        
-        name3.setText(p2.getName());
-        price3.setText(Double.toString(p2.getPrice()));
-        stock3.setText(Integer.toString(p2.getStock()));
-        
-        name4.setText(p2.getName());
-        price4.setText(Double.toString(p2.getPrice()));
-        stock4.setText(Integer.toString(p2.getStock()));
- 
+            initComponents();
+    
+    addWindowListener(new java.awt.event.WindowAdapter() {
+        @Override
+        public void windowOpened(java.awt.event.WindowEvent evt) {
+            loadProducts();
+            System.out.println("ProductsFrame opened with " 
+                + Product.getAllProducts().size() + " products");
+        }
+    });
+    
+    loadProducts();
     }
+    
+    private void loadProducts() {
+    ArrayList<Product> products = Product.getAllProducts();
+    
+    if (products.isEmpty()) {
+        addDefaultProducts();
+        products = Product.getAllProducts();
+    }
+    
+    if (products.size() >= 1) {
+        displayProduct1(products.get(0));
+    } else {
+        hideProduct1(); 
+    }
+    
+    if (products.size() >= 2) {
+        displayProduct2(products.get(1));
+    } else {
+        hideProduct2();
+    }
+    
+    if (products.size() >= 3) {
+        displayProduct3(products.get(2));
+    } else {
+        hideProduct3();
+    }
+    
+    if (products.size() >= 4) {
+        displayProduct4(products.get(3));
+    } else {
+        hideProduct4();
+    }
+    
+    System.out.println("Loaded " + products.size() + " products");
+}
+    
+    private void hideProduct1() {
+    catTF.setVisible(false);
+}
+
+private void hideProduct2() {
+    catTF7.setVisible(false);
+}
+
+private void hideProduct3() {
+    catTF3.setVisible(false);
+}
+
+private void hideProduct4() {
+    catTF2.setVisible(false);
+}
+    
+    
+    private void addDefaultProducts() {
+        p1 = ProductFactoryProvider.getFactory("home appliance", "Washing Machine", 8500, 12, "1500", "A++");
+        p2 = ProductFactoryProvider.getFactory("electronics", "Laptop", 35000, 3, "2 years", "Dell");
+        p3 = ProductFactoryProvider.getFactory("clothing", "Jacket", 850, 5, "L", "Cotton");
+        p4 = ProductFactoryProvider.getFactory("home appliance", "Refrigerator", 12000, 2, "450", "A+");
+        
+        Product.addProduct(p1);
+        Product.addProduct(p2);
+        Product.addProduct(p3);
+        Product.addProduct(p4);
+    }
+    
+    private void displayProduct1(Product product) {
+        p1 = product;
+        name1.setText(product.getName());
+        price1.setText("$" + product.getPrice());
+        stock1.setText(String.valueOf(product.getStock()));
+        jLabel17.setText(product.getCategory());
+        
+        if (product instanceof HomeAppliance) {
+            HomeAppliance ha = (HomeAppliance) product;
+            s11.setText(ha.getEnergyRating());
+            s21.setText(ha.getPowerConsumption() + "W");
+            jLabel21.setVisible(true);
+            jLabel22.setVisible(true);
+            s11.setVisible(true);
+            s21.setVisible(true);
+        }
+    }
+    
+    
+    private void displayProduct2(Product product) {
+        p2 = product;
+        name2.setText(product.getName());
+        price2.setText("$" + product.getPrice());
+        stock2.setText(String.valueOf(product.getStock()));
+        jLabel73.setText(product.getCategory());
+        
+        if (product instanceof Electronics) {
+            Electronics el = (Electronics) product;
+            s12.setText(el.getWarranty());
+            s22.setText(el.getBrand());
+            jLabel77.setText("Warranty:");
+            jLabel78.setText("Brand:");
+            jLabel77.setVisible(true);
+            jLabel78.setVisible(true);
+            s12.setVisible(true);
+            s22.setVisible(true);
+        }
+    }
+    
+    
+    private void displayProduct3(Product product) {
+        p3 = product;
+        name3.setText(product.getName());
+        price3.setText("$" + product.getPrice());
+        stock3.setText(String.valueOf(product.getStock()));
+        jLabel81.setText(product.getCategory());
+        
+        if (product instanceof Clothing) {
+            Clothing cl = (Clothing) product;
+            s13.setText(cl.getSize());
+            s23.setText(cl.getMaterial());
+            jLabel85.setVisible(true);
+            jLabel86.setVisible(true);
+            s13.setVisible(true);
+            s23.setVisible(true);
+        }
+    }
+    
+    
+    private void displayProduct4(Product product) {
+        p4 = product;
+        name4.setText(product.getName());
+        price4.setText("$" + product.getPrice());
+        stock4.setText(String.valueOf(product.getStock()));
+        jLabel89.setText(product.getCategory());
+        
+        if (product instanceof HomeAppliance) {
+            HomeAppliance ha = (HomeAppliance) product;
+            s14.setText(ha.getEnergyRating());
+            s24.setText(ha.getPowerConsumption() + "W");
+            jLabel93.setVisible(true);
+            jLabel94.setVisible(true);
+            s14.setVisible(true);
+            s24.setVisible(true);
+        }
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -703,14 +835,17 @@ public class ProductsFrame extends javax.swing.JFrame {
         jLabel17.setForeground(new java.awt.Color(255, 255, 255));
         jLabel17.setText("HomeApp");
 
+        name1.setBackground(new java.awt.Color(136, 96, 90));
         name1.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         name1.setForeground(new java.awt.Color(255, 255, 255));
         name1.setOpaque(true);
 
+        price1.setBackground(new java.awt.Color(136, 96, 90));
         price1.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         price1.setForeground(new java.awt.Color(255, 255, 255));
         price1.setOpaque(true);
 
+        stock1.setBackground(new java.awt.Color(136, 96, 90));
         stock1.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         stock1.setForeground(new java.awt.Color(255, 255, 255));
         stock1.setOpaque(true);
@@ -723,10 +858,12 @@ public class ProductsFrame extends javax.swing.JFrame {
         jLabel22.setForeground(new java.awt.Color(255, 255, 255));
         jLabel22.setText("powerConsumption :");
 
+        s11.setBackground(new java.awt.Color(136, 96, 90));
         s11.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         s11.setForeground(new java.awt.Color(255, 255, 255));
         s11.setOpaque(true);
 
+        s21.setBackground(new java.awt.Color(136, 96, 90));
         s21.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         s21.setForeground(new java.awt.Color(255, 255, 255));
         s21.setOpaque(true);
@@ -839,14 +976,17 @@ public class ProductsFrame extends javax.swing.JFrame {
         jLabel73.setForeground(new java.awt.Color(255, 255, 255));
         jLabel73.setText("Electronics");
 
+        name2.setBackground(new java.awt.Color(136, 96, 90));
         name2.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         name2.setForeground(new java.awt.Color(255, 255, 255));
         name2.setOpaque(true);
 
+        price2.setBackground(new java.awt.Color(136, 96, 90));
         price2.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         price2.setForeground(new java.awt.Color(255, 255, 255));
         price2.setOpaque(true);
 
+        stock2.setBackground(new java.awt.Color(136, 96, 90));
         stock2.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         stock2.setForeground(new java.awt.Color(255, 255, 255));
         stock2.setOpaque(true);
@@ -859,10 +999,12 @@ public class ProductsFrame extends javax.swing.JFrame {
         jLabel78.setForeground(new java.awt.Color(255, 255, 255));
         jLabel78.setText("brand :");
 
+        s12.setBackground(new java.awt.Color(136, 96, 90));
         s12.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         s12.setForeground(new java.awt.Color(255, 255, 255));
         s12.setOpaque(true);
 
+        s22.setBackground(new java.awt.Color(136, 96, 90));
         s22.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         s22.setForeground(new java.awt.Color(255, 255, 255));
         s22.setOpaque(true);
@@ -975,14 +1117,17 @@ public class ProductsFrame extends javax.swing.JFrame {
         jLabel81.setForeground(new java.awt.Color(255, 255, 255));
         jLabel81.setText("Clothing");
 
+        name3.setBackground(new java.awt.Color(136, 96, 90));
         name3.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         name3.setForeground(new java.awt.Color(255, 255, 255));
         name3.setOpaque(true);
 
+        price3.setBackground(new java.awt.Color(136, 96, 90));
         price3.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         price3.setForeground(new java.awt.Color(255, 255, 255));
         price3.setOpaque(true);
 
+        stock3.setBackground(new java.awt.Color(136, 96, 90));
         stock3.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         stock3.setForeground(new java.awt.Color(255, 255, 255));
         stock3.setOpaque(true);
@@ -995,10 +1140,12 @@ public class ProductsFrame extends javax.swing.JFrame {
         jLabel86.setForeground(new java.awt.Color(255, 255, 255));
         jLabel86.setText("material :");
 
+        s13.setBackground(new java.awt.Color(136, 96, 90));
         s13.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         s13.setForeground(new java.awt.Color(255, 255, 255));
         s13.setOpaque(true);
 
+        s23.setBackground(new java.awt.Color(136, 96, 90));
         s23.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         s23.setForeground(new java.awt.Color(255, 255, 255));
         s23.setOpaque(true);
@@ -1109,14 +1256,17 @@ public class ProductsFrame extends javax.swing.JFrame {
         jLabel89.setForeground(new java.awt.Color(255, 255, 255));
         jLabel89.setText("HomeApp");
 
+        name4.setBackground(new java.awt.Color(136, 96, 90));
         name4.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         name4.setForeground(new java.awt.Color(255, 255, 255));
         name4.setOpaque(true);
 
+        price4.setBackground(new java.awt.Color(136, 96, 90));
         price4.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         price4.setForeground(new java.awt.Color(255, 255, 255));
         price4.setOpaque(true);
 
+        stock4.setBackground(new java.awt.Color(136, 96, 90));
         stock4.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         stock4.setForeground(new java.awt.Color(255, 255, 255));
         stock4.setOpaque(true);
@@ -1129,10 +1279,12 @@ public class ProductsFrame extends javax.swing.JFrame {
         jLabel94.setForeground(new java.awt.Color(255, 255, 255));
         jLabel94.setText("powerConsumption :");
 
+        s14.setBackground(new java.awt.Color(136, 96, 90));
         s14.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         s14.setForeground(new java.awt.Color(255, 255, 255));
         s14.setOpaque(true);
 
+        s24.setBackground(new java.awt.Color(136, 96, 90));
         s24.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         s24.setForeground(new java.awt.Color(255, 255, 255));
         s24.setOpaque(true);
@@ -1262,23 +1414,36 @@ public class ProductsFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void MyAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MyAccountActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        new MyAccountFrame().setVisible(true);
     }//GEN-LAST:event_MyAccountActionPerformed
 
     private void ProductsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProductsActionPerformed
-        // TODO add your handling code here:
+    catTF.setVisible(true);
+    catTF7.setVisible(true);
+    catTF3.setVisible(true);
+    catTF2.setVisible(true);
+    
+    loadProducts();
+    
+    javax.swing.JOptionPane.showMessageDialog(this, 
+        "Products page refreshed!\n" +
+        "Total Products: " + Product.getAllProducts().size());
     }//GEN-LAST:event_ProductsActionPerformed
 
     private void OrdersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrdersActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        new OrdersFrame().setVisible(true);
     }//GEN-LAST:event_OrdersActionPerformed
 
     private void AddProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddProductActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        new AddProductFrame().setVisible(true);
     }//GEN-LAST:event_AddProductActionPerformed
 
     private void MyCartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MyCartActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        new MyCartFrame().setVisible(true);
     }//GEN-LAST:event_MyCartActionPerformed
 
     private void custom1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custom1ActionPerformed
@@ -1352,9 +1517,7 @@ public class ProductsFrame extends javax.swing.JFrame {
     private javax.swing.JButton Addtocart111;
     private javax.swing.JButton Addtocart12;
     private javax.swing.JButton Addtocart13;
-    private javax.swing.JButton Addtocart2;
     private javax.swing.JButton Addtocart222;
-    private javax.swing.JButton Addtocart3;
     private javax.swing.JButton Addtocart333;
     private javax.swing.JButton Addtocart444;
     private javax.swing.JButton Addtocart8;
@@ -1364,7 +1527,6 @@ public class ProductsFrame extends javax.swing.JFrame {
     private javax.swing.JButton Orders;
     private javax.swing.JButton Products;
     private javax.swing.JPanel catTF;
-    private javax.swing.JPanel catTF1;
     private javax.swing.JPanel catTF2;
     private javax.swing.JPanel catTF3;
     private javax.swing.JPanel catTF4;
@@ -1387,15 +1549,7 @@ public class ProductsFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
@@ -1414,7 +1568,6 @@ public class ProductsFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel47;
     private javax.swing.JLabel jLabel48;
     private javax.swing.JLabel jLabel49;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel51;
     private javax.swing.JLabel jLabel52;
@@ -1425,7 +1578,6 @@ public class ProductsFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel57;
     private javax.swing.JLabel jLabel58;
     private javax.swing.JLabel jLabel59;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel60;
     private javax.swing.JLabel jLabel61;
     private javax.swing.JLabel jLabel62;
@@ -1436,14 +1588,12 @@ public class ProductsFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel67;
     private javax.swing.JLabel jLabel68;
     private javax.swing.JLabel jLabel69;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel70;
     private javax.swing.JLabel jLabel71;
     private javax.swing.JLabel jLabel72;
     private javax.swing.JLabel jLabel73;
     private javax.swing.JLabel jLabel77;
     private javax.swing.JLabel jLabel78;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel81;
     private javax.swing.JLabel jLabel85;
     private javax.swing.JLabel jLabel86;

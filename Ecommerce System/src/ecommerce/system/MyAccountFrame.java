@@ -259,19 +259,23 @@ public class MyAccountFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_MyAccountActionPerformed
 
     private void ProductsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProductsActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        new ProductsFrame().setVisible(true);
     }//GEN-LAST:event_ProductsActionPerformed
 
     private void OrdersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrdersActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        new OrdersFrame().setVisible(true);
     }//GEN-LAST:event_OrdersActionPerformed
 
     private void AddProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddProductActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        new AddProductFrame().setVisible(true);
     }//GEN-LAST:event_AddProductActionPerformed
 
     private void MyCartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MyCartActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        new MyCartFrame().setVisible(true);
     }//GEN-LAST:event_MyCartActionPerformed
 
     private void JtxtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JtxtNameActionPerformed

@@ -190,11 +190,13 @@ public class OrdersFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void MyAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MyAccountActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        new MyAccountFrame().setVisible(true); 
     }//GEN-LAST:event_MyAccountActionPerformed
 
     private void ProductsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProductsActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        new ProductsFrame().setVisible(true); 
     }//GEN-LAST:event_ProductsActionPerformed
 
     private void OrdersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrdersActionPerformed
@@ -202,11 +204,13 @@ public class OrdersFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_OrdersActionPerformed
 
     private void AddProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddProductActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        new AddProductFrame().setVisible(true);    
     }//GEN-LAST:event_AddProductActionPerformed
 
     private void MyCartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MyCartActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        new MyCartFrame().setVisible(true);
     }//GEN-LAST:event_MyCartActionPerformed
 
     /**
