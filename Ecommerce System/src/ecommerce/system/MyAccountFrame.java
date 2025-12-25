@@ -4,6 +4,9 @@
  */
 package ecommerce.system;
 
+import ecommerce.system.Customer;
+import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -18,6 +21,16 @@ public class MyAccountFrame extends javax.swing.JFrame {
     static Customer customer ;  
     public MyAccountFrame() {
         initComponents();
+        loadCustomerData();
+    }
+    
+    private void loadCustomerData() {
+        if (customer != null) {
+            JtxtName.setText(customer.getName());
+            JtxtُُEmail.setText(customer.getEmail());
+            JtxtPhone.setText(customer.getPhone());
+            JtxtAddress.setText(customer.getAddress());
+        }
     }
 
     /**
@@ -124,15 +137,22 @@ public class MyAccountFrame extends javax.swing.JFrame {
                 .addContainerGap(118, Short.MAX_VALUE))
         );
 
+        ProfilePanel.setBackground(new java.awt.Color(136, 96, 90));
+
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("                        Profile Information");
 
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Name:");
 
+        txtAddress.setForeground(new java.awt.Color(255, 255, 255));
         txtAddress.setText("Address");
 
+        txtEmail.setForeground(new java.awt.Color(255, 255, 255));
         txtEmail.setText("Email:");
 
+        txtPhone.setForeground(new java.awt.Color(255, 255, 255));
         txtPhone.setText("Phone: ");
 
         JtxtName.addActionListener(new java.awt.event.ActionListener() {
@@ -291,14 +311,88 @@ public class MyAccountFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_JtxtُُEmailActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-  
-        // ممكن تضيف JOptionPan
-        String name = JtxtName.getText();
-        String email = JtxtُُEmail.getText();
-        String phone = JtxtPhone.getText();
-        String address = JtxtAddress.getText();
-         customer = new Customer(name , email , address , phone);
-         
+
+        try {
+            String name = JtxtName.getText().trim();
+            String email = JtxtُُEmail.getText().trim();
+            String phone = JtxtPhone.getText().trim();
+            String address = JtxtAddress.getText().trim();
+            
+            if (name.isEmpty()) {
+                JOptionPane.showMessageDialog(this, 
+                    "Name is required!", 
+                    "Validation Error", 
+                    JOptionPane.ERROR_MESSAGE);
+                JtxtName.requestFocus();
+                return;
+            }
+            
+            if (email.isEmpty()) {
+                JOptionPane.showMessageDialog(this, 
+                    "Email is required!", 
+                    "Validation Error", 
+                    JOptionPane.ERROR_MESSAGE);
+                JtxtُُEmail.requestFocus();
+                return;
+            }
+            
+            if (!email.contains("@") || !email.contains(".")) {
+                JOptionPane.showMessageDialog(this, 
+                    "Please enter a valid email address!\n" +
+                    "Example: user@example.com", 
+                    "Validation Error", 
+                    JOptionPane.ERROR_MESSAGE);
+                JtxtُُEmail.requestFocus();
+                return;
+            }
+            
+            if (phone.isEmpty()) {
+                JOptionPane.showMessageDialog(this, 
+                    "Phone number is required!", 
+                    "Validation Error", 
+                    JOptionPane.ERROR_MESSAGE);
+                JtxtPhone.requestFocus();
+                return;
+            }
+            
+            if (!phone.matches("\\d+")) {
+                JOptionPane.showMessageDialog(this, 
+                    "Phone number must contain only digits!", 
+                    "Validation Error", 
+                    JOptionPane.ERROR_MESSAGE);
+                JtxtPhone.requestFocus();
+                return;
+            }
+            
+            if (address.isEmpty()) {
+                JOptionPane.showMessageDialog(this, 
+                    "Address is required!", 
+                    "Validation Error", 
+                    JOptionPane.ERROR_MESSAGE);
+                JtxtAddress.requestFocus();
+                return;
+            }
+            
+            customer = new Customer(name, email, address, phone);
+            
+            JOptionPane.showMessageDialog(this, 
+                "Profile Saved Successfully!\n\n" +
+                "Name: " + name + "\n" +
+                "Email: " + email + "\n" +
+                "Phone: " + phone + "\n" +
+                "Address: " + address, 
+                "Success", 
+                JOptionPane.INFORMATION_MESSAGE);
+            
+            System.out.println("Customer profile saved: " + customer.getName());
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, 
+                "Error saving profile: " + e.getMessage(), 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }       
     }//GEN-LAST:event_btnSaveActionPerformed
 
     /**
