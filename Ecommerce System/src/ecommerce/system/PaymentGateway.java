@@ -8,7 +8,7 @@ package ecommerce.system;
  *
  * @author DELL
  */
-public class PaymentGateway {
+public class PaymentGateway implements PaymentService{
     private static PaymentGateway instance;
 
     private PaymentGateway() {
@@ -32,6 +32,20 @@ public class PaymentGateway {
 
     private boolean validatePayment(double amount) {
         return amount > 0;
+    }
+
+    @Override
+    public boolean pay(String type, String reference, double amount) {
+        
+    if ("credit".equalsIgnoreCase(type)) {
+            return processCreditCard(reference, amount);
+        }
+
+        if ("paypal".equalsIgnoreCase(type)) {
+            return processPayPal(reference, amount);
+        }
+
+        return false;
     }
     
 }

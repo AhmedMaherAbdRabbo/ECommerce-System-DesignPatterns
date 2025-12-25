@@ -18,7 +18,7 @@ public class MyAccountFrame extends javax.swing.JFrame {
      * Creates new form MyAccount
      */
     
-    static Customer customer ;  
+    Customer customer ;  
     public MyAccountFrame() {
         initComponents();
         loadCustomerData();
@@ -173,7 +173,7 @@ public class MyAccountFrame extends javax.swing.JFrame {
             }
         });
 
-        btnSave.setText("Save ");
+        btnSave.setText("Login");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSaveActionPerformed(evt);
@@ -375,6 +375,9 @@ public class MyAccountFrame extends javax.swing.JFrame {
             
             customer = new Customer(name, email, address, phone);
             CustomerSession.getInstance().setCurrentCustomer(customer); 
+            customer = CustomerSession.getInstance().getCurrentCustomer();
+            System.out.println("sucess");
+                 
 
             
             JOptionPane.showMessageDialog(this, 
