@@ -4,6 +4,10 @@
  */
 package ecommerce.system;
 
+import java.util.List;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 
 
 /**
@@ -15,8 +19,15 @@ public class MyCartFrame extends javax.swing.JFrame {
     /**
      * Creates new form MyCart
      */
+    private JTable cartTable;
+    private DefaultTableModel model;
+    
     public MyCartFrame() {
         initComponents();
+        model = (DefaultTableModel) table_cart.getModel();
+        CartManager CM = CartManager.getInstance();
+        fillFromCart(CM.getCartItems());
+        label_total.setText(String.valueOf(CM.calculateTotal())+"$");
     }
 
     /**
@@ -201,6 +212,18 @@ public class MyCartFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void fillFromCart(List<CartItem> items) {
+    model.setRowCount(0); // clear table
+    for (CartItem item : items) {
+        model.addRow(new Object[]{
+            item.getProduct().getName(),
+            item.getProduct().getPrice(),
+            item.getQuantity(),
+            item.getTotalPrice()
+        });
+    }
+}
+
     private void MyAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MyAccountActionPerformed
         this.dispose();
         new MyAccountFrame().setVisible(true); 
@@ -227,6 +250,9 @@ public class MyCartFrame extends javax.swing.JFrame {
 
     private void bt_checkoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_checkoutActionPerformed
         // TODO add your handling code here:
+        this.dispose();
+        new CheckOut().setVisible(true);
+        
     }//GEN-LAST:event_bt_checkoutActionPerformed
 
     /**

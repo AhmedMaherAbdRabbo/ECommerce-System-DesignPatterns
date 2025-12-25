@@ -13,8 +13,11 @@ public class CustomizeYourProductFrame extends javax.swing.JFrame {
     /**
      * Creates new form CustomizeYourProductFrame
      */
-    public CustomizeYourProductFrame() {
+    Product product ; 
+    public CustomizeYourProductFrame(Product p) {
         initComponents();
+        this.product = p ;
+//        product = pp ;
     }
 
     /**
@@ -46,6 +49,11 @@ public class CustomizeYourProductFrame extends javax.swing.JFrame {
         Apply.setBackground(new java.awt.Color(69, 40, 41));
         Apply.setForeground(new java.awt.Color(255, 255, 255));
         Apply.setText("Apply");
+        Apply.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ApplyActionPerformed(evt);
+            }
+        });
 
         Clear.setBackground(new java.awt.Color(69, 40, 41));
         Clear.setForeground(new java.awt.Color(255, 255, 255));
@@ -96,6 +104,29 @@ public class CustomizeYourProductFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+   
+    private void ApplyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApplyActionPerformed
+        // TODO add your handling code here:
+        boolean isGift = GiftWrapCheckBox.isSelected();
+        boolean isPremium = PremiumPackageCheckBox.isSelected();
+        
+        if (isGift) {
+////         ProductsFrame.isGift =true ; 
+//         pf.gift1();
+            product = new GiftWrapDecorator(product);
+        }
+        if(isPremium) {
+//         ProductsFrame.isPremium = false;
+//         pf.premiem(); 
+            product = new PremiumPackageDecorator(product);
+        } 
+        
+        ProductsFrame pf = new ProductsFrame(product);
+        this.dispose();
+        pf.setVisible(true);
+    }//GEN-LAST:event_ApplyActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -126,7 +157,7 @@ public class CustomizeYourProductFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CustomizeYourProductFrame().setVisible(true);
+//                new CustomizeYourProductFrame().setVisible(true);
             }
         });
     }

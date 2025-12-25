@@ -6,9 +6,9 @@ public class GiftWrapDecorator extends BaseProductDecorator{
     private double wrapCost = 75;
     private String style; 
 
-    public GiftWrapDecorator(Product product , String style) {
+    public GiftWrapDecorator(Product product) {
         super(product);
-        this.style = style;
+        this.style = "GIFT Style";
     }
 
     @Override
@@ -23,7 +23,7 @@ public class GiftWrapDecorator extends BaseProductDecorator{
 
     
     public Product clone(){
-       return new GiftWrapDecorator(product_decrator.clone(), this.style);
+       return new GiftWrapDecorator(product_decrator.clone());
     }
     
     

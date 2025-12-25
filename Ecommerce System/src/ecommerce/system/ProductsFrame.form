@@ -1145,6 +1145,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Add to cart"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Addtocart111ActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="custom1">
               <Properties>
@@ -1421,6 +1424,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Add to cart"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Addtocart222ActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="custom2">
               <Properties>
@@ -1694,6 +1700,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Add to cart"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Addtocart333ActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="custom3">
               <Properties>
@@ -1970,6 +1979,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Add to cart"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Addtocart444ActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="custom4">
               <Properties>

@@ -8,6 +8,7 @@ public class Customer {
     private String address;
     private String phone ; 
     
+    public static Customer current_customer = new Customer("mohamed" , "mohammed@gmail.com" , "sohag" , "012");
     
     public Customer(String name, String email, String address , String phone) {
         this.name = name;
@@ -47,6 +48,8 @@ public class Customer {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
+ 
 
     
 

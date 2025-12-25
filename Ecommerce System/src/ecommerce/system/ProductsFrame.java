@@ -17,7 +17,8 @@ public class ProductsFrame extends javax.swing.JFrame {
     /**
      * Creates new form Products
      */
-    
+    static boolean isPremium = false ;
+    static boolean isGift = false ;
     Product p1 ;     
     Product p2 ;
     Product p3 ; 
@@ -38,6 +39,19 @@ public class ProductsFrame extends javax.swing.JFrame {
     loadProducts();
     }
     
+    public ProductsFrame(Product p)
+    {
+        initComponents();
+        this.p1 = p;
+        displayProduct1(p1);
+        displayProduct2(p2);        
+        displayProduct3(p3);
+        displayProduct4(p3);
+
+        
+
+    
+    }
     private void loadProducts() {
     ArrayList<Product> products = Product.getAllProducts();
     
@@ -69,6 +83,7 @@ public class ProductsFrame extends javax.swing.JFrame {
     } else {
         hideProduct4();
     }
+    
     
     System.out.println("Loaded " + products.size() + " products");
 }
@@ -104,13 +119,13 @@ private void hideProduct4() {
     
     private void displayProduct1(Product product) {
         p1 = product;
-        name1.setText(product.getName());
-        price1.setText("$" + product.getPrice());
-        stock1.setText(String.valueOf(product.getStock()));
-        jLabel17.setText(product.getCategory());
+        name1.setText(p1.getName());
+        price1.setText("$" + p1.getPrice());
+        stock1.setText(String.valueOf(p1.getStock()));
+        jLabel17.setText(p1.getCategory());
         
-        if (product instanceof HomeAppliance) {
-            HomeAppliance ha = (HomeAppliance) product;
+        if (p1 instanceof HomeAppliance) {
+            HomeAppliance ha = (HomeAppliance) p1;
             s11.setText(ha.getEnergyRating());
             s21.setText(ha.getPowerConsumption() + "W");
             jLabel21.setVisible(true);
@@ -123,13 +138,13 @@ private void hideProduct4() {
     
     private void displayProduct2(Product product) {
         p2 = product;
-        name2.setText(product.getName());
-        price2.setText("$" + product.getPrice());
-        stock2.setText(String.valueOf(product.getStock()));
-        jLabel73.setText(product.getCategory());
+        name2.setText(p2.getName());
+        price2.setText("$" + p2.getPrice());
+        stock2.setText(String.valueOf(p2.getStock()));
+        jLabel73.setText(p2.getCategory());
         
-        if (product instanceof Electronics) {
-            Electronics el = (Electronics) product;
+        if (p2 instanceof Electronics) {
+            Electronics el = (Electronics) p2;
             s12.setText(el.getWarranty());
             s22.setText(el.getBrand());
             jLabel77.setText("Warranty:");
@@ -144,13 +159,13 @@ private void hideProduct4() {
     
     private void displayProduct3(Product product) {
         p3 = product;
-        name3.setText(product.getName());
-        price3.setText("$" + product.getPrice());
-        stock3.setText(String.valueOf(product.getStock()));
-        jLabel81.setText(product.getCategory());
+        name3.setText(p3.getName());
+        price3.setText("$" + p3.getPrice());
+        stock3.setText(String.valueOf(p3.getStock()));
+        jLabel81.setText(p3.getCategory());
         
-        if (product instanceof Clothing) {
-            Clothing cl = (Clothing) product;
+        if (p3 instanceof Clothing) {
+            Clothing cl = (Clothing) p3;
             s13.setText(cl.getSize());
             s23.setText(cl.getMaterial());
             jLabel85.setVisible(true);
@@ -163,13 +178,13 @@ private void hideProduct4() {
     
     private void displayProduct4(Product product) {
         p4 = product;
-        name4.setText(product.getName());
-        price4.setText("$" + product.getPrice());
-        stock4.setText(String.valueOf(product.getStock()));
-        jLabel89.setText(product.getCategory());
+        name4.setText(p4.getName());
+        price4.setText("$" + p4.getPrice());
+        stock4.setText(String.valueOf(p4.getStock()));
+        jLabel89.setText(p4.getCategory());
         
-        if (product instanceof HomeAppliance) {
-            HomeAppliance ha = (HomeAppliance) product;
+        if (p4 instanceof HomeAppliance) {
+            HomeAppliance ha = (HomeAppliance) p4;
             s14.setText(ha.getEnergyRating());
             s24.setText(ha.getPowerConsumption() + "W");
             jLabel93.setVisible(true);
@@ -180,6 +195,7 @@ private void hideProduct4() {
     }
     
     
+ 
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -821,6 +837,11 @@ private void hideProduct4() {
         Addtocart111.setBackground(new java.awt.Color(55, 53, 62));
         Addtocart111.setForeground(new java.awt.Color(255, 255, 255));
         Addtocart111.setText("Add to cart");
+        Addtocart111.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Addtocart111ActionPerformed(evt);
+            }
+        });
 
         custom1.setBackground(new java.awt.Color(55, 53, 62));
         custom1.setForeground(new java.awt.Color(255, 255, 255));
@@ -962,6 +983,11 @@ private void hideProduct4() {
         Addtocart222.setBackground(new java.awt.Color(55, 53, 62));
         Addtocart222.setForeground(new java.awt.Color(255, 255, 255));
         Addtocart222.setText("Add to cart");
+        Addtocart222.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Addtocart222ActionPerformed(evt);
+            }
+        });
 
         custom2.setBackground(new java.awt.Color(55, 53, 62));
         custom2.setForeground(new java.awt.Color(255, 255, 255));
@@ -1103,6 +1129,11 @@ private void hideProduct4() {
         Addtocart333.setBackground(new java.awt.Color(55, 53, 62));
         Addtocart333.setForeground(new java.awt.Color(255, 255, 255));
         Addtocart333.setText("Add to cart");
+        Addtocart333.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Addtocart333ActionPerformed(evt);
+            }
+        });
 
         custom3.setBackground(new java.awt.Color(55, 53, 62));
         custom3.setForeground(new java.awt.Color(255, 255, 255));
@@ -1242,6 +1273,11 @@ private void hideProduct4() {
         Addtocart444.setBackground(new java.awt.Color(55, 53, 62));
         Addtocart444.setForeground(new java.awt.Color(255, 255, 255));
         Addtocart444.setText("Add to cart");
+        Addtocart444.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Addtocart444ActionPerformed(evt);
+            }
+        });
 
         custom4.setBackground(new java.awt.Color(55, 53, 62));
         custom4.setForeground(new java.awt.Color(255, 255, 255));
@@ -1417,7 +1453,11 @@ private void hideProduct4() {
         this.dispose();
         new MyAccountFrame().setVisible(true);
     }//GEN-LAST:event_MyAccountActionPerformed
-
+    
+    private void add_to_cart(Product p , int q){
+        CartManager mycart = CartManager.getInstance();
+        mycart.addItem(p,q);
+    } 
     private void ProductsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProductsActionPerformed
     catTF.setVisible(true);
     catTF7.setVisible(true);
@@ -1448,6 +1488,8 @@ private void hideProduct4() {
 
     private void custom1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custom1ActionPerformed
         // TODO add your handling code here:
+        this.dispose();
+        new CustomizeYourProductFrame(p1).setVisible(true);
     }//GEN-LAST:event_custom1ActionPerformed
 
     private void Addtocart9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Addtocart9ActionPerformed
@@ -1473,6 +1515,26 @@ private void hideProduct4() {
     private void custom4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_custom4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_custom4ActionPerformed
+
+    private void Addtocart111ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Addtocart111ActionPerformed
+        // TODO add your handling code here:
+        add_to_cart(p1, 1);
+    }//GEN-LAST:event_Addtocart111ActionPerformed
+
+    private void Addtocart333ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Addtocart333ActionPerformed
+        // TODO add your handling code here:
+        add_to_cart(p3, 1);
+    }//GEN-LAST:event_Addtocart333ActionPerformed
+
+    private void Addtocart222ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Addtocart222ActionPerformed
+        // TODO add your handling code here:
+        add_to_cart(p2, 1);
+    }//GEN-LAST:event_Addtocart222ActionPerformed
+
+    private void Addtocart444ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Addtocart444ActionPerformed
+        // TODO add your handling code here:
+        add_to_cart(p4, 1);
+    }//GEN-LAST:event_Addtocart444ActionPerformed
 
     /**
      * @param args the command line arguments

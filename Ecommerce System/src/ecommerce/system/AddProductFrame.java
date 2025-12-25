@@ -25,135 +25,6 @@ public class AddProductFrame extends javax.swing.JFrame {
     }
     
     
-    private void AddProductbtActionPerformed(java.awt.event.ActionEvent evt) {
-    try {
-        String name = nameTF.getText().trim();
-        String priceText = priceTF.getText().trim();
-        String stockText = stockTF.getText().trim();
-        String category = (String) jComboBox1.getSelectedItem();
-        
-        if (name.isEmpty() || priceText.isEmpty() || stockText.isEmpty() 
-            || category.equals("choose")) {
-            javax.swing.JOptionPane.showMessageDialog(this, 
-                "Please fill all required fields!", 
-                "Error", 
-                javax.swing.JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        
-        double price = Double.parseDouble(priceText);
-        int stock = Integer.parseInt(stockText);
-        
-        if (price <= 0 || stock < 0) {
-            javax.swing.JOptionPane.showMessageDialog(this, 
-                "Price must be positive and stock cannot be negative!", 
-                "Error", 
-                javax.swing.JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        
-        Product newProduct = null;
-        
-        switch (category.toLowerCase()) {
-            case "electronics":
-                String warranty = warrantyTF.getText().trim();
-                String brand = brandTF.getText().trim();
-                
-                if (warranty.isEmpty() || brand.isEmpty()) {
-                    javax.swing.JOptionPane.showMessageDialog(this, 
-                        "Electronics needs: Warranty & Brand!", 
-                        "Error", 
-                        javax.swing.JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-                
-                newProduct = ProductFactoryProvider.getFactory(
-                    category, name, price, stock, warranty, brand
-                );
-                break;
-                
-            case "clothing":
-                String size = sizeTF.getText().trim();
-                String material = materialTF.getText().trim();
-                
-                if (size.isEmpty() || material.isEmpty()) {
-                    javax.swing.JOptionPane.showMessageDialog(this, 
-                        "Clothing needs: Size & Material!", 
-                        "Error", 
-                        javax.swing.JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-                
-                newProduct = ProductFactoryProvider.getFactory(
-                    category, name, price, stock, size, material
-                );
-                break;
-                
-            case "homeapp":
-                String powerConsumption = powerConsumptionTF.getText().trim();
-                String energyRating = energyRatingTF.getText().trim();
-                
-                if (powerConsumption.isEmpty() || energyRating.isEmpty()) {
-                    javax.swing.JOptionPane.showMessageDialog(this, 
-                        "Home Appliance needs: Power Consumption & Energy Rating!", 
-                        "Error", 
-                        javax.swing.JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-                
-                newProduct = ProductFactoryProvider.getFactory(
-                    "home appliance", name, price, stock, 
-                    powerConsumption, energyRating
-                );
-                break;
-                
-            default:
-                javax.swing.JOptionPane.showMessageDialog(this, 
-                    "Please select a valid category!", 
-                    "Error", 
-                    javax.swing.JOptionPane.ERROR_MESSAGE);
-                return;
-        }
-        
-        if (newProduct != null) {
-            Product.addProduct(newProduct);
-            
-            System.out.println("Product added! Total: " + Product.getAllProducts().size());
-            
-            int result = javax.swing.JOptionPane.showConfirmDialog(this, 
-                "Product Added Successfully!\n\n" +
-                "Product: " + name + "\n" +
-                "Price: $" + price + "\n" +
-                "Stock: " + stock + "\n" +
-                "Category: " + category + "\n\n" +
-                "Total Products in System: " + Product.getAllProducts().size() + "\n\n" +
-                "Do you want to view all products?", 
-                "Success", 
-                javax.swing.JOptionPane.YES_NO_OPTION,
-                javax.swing.JOptionPane.INFORMATION_MESSAGE);
-            
-            if (result == javax.swing.JOptionPane.YES_OPTION) {
-                this.dispose();
-                ProductsFrame pf = new ProductsFrame();
-                pf.setVisible(true);
-            } else {
-                clearFields();
-            }
-        }
-        
-    } catch (NumberFormatException e) {
-        javax.swing.JOptionPane.showMessageDialog(this, 
-            "Please enter valid numbers for price and stock!", 
-            "Error", 
-            javax.swing.JOptionPane.ERROR_MESSAGE);
-    } catch (Exception e) {
-        javax.swing.JOptionPane.showMessageDialog(this, 
-            "Error: " + e.getMessage(), 
-            "Error", 
-            javax.swing.JOptionPane.ERROR_MESSAGE);
-        e.printStackTrace();
-    }
-}
     
     private void clearFields() {
         nameTF.setText("");
@@ -310,6 +181,11 @@ public class AddProductFrame extends javax.swing.JFrame {
         AddProductbt.setBackground(new java.awt.Color(55, 53, 62));
         AddProductbt.setForeground(new java.awt.Color(255, 255, 255));
         AddProductbt.setText("Add Product");
+        AddProductbt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddProductbtActionPerformed(evt);
+            }
+        });
 
         brand.setFont(new java.awt.Font("Segoe UI Emoji", 3, 18)); // NOI18N
         brand.setForeground(new java.awt.Color(255, 255, 255));
@@ -490,6 +366,10 @@ public class AddProductFrame extends javax.swing.JFrame {
         this.dispose();
         new MyCartFrame().setVisible(true);
     }//GEN-LAST:event_MyCartActionPerformed
+
+    private void AddProductbtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddProductbtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AddProductbtActionPerformed
 
     /**
      * @param args the command line arguments

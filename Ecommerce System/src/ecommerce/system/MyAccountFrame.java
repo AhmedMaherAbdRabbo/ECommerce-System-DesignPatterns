@@ -374,6 +374,8 @@ public class MyAccountFrame extends javax.swing.JFrame {
             }
             
             customer = new Customer(name, email, address, phone);
+            CustomerSession.getInstance().setCurrentCustomer(customer); 
+
             
             JOptionPane.showMessageDialog(this, 
                 "Profile Saved Successfully!\n\n" +

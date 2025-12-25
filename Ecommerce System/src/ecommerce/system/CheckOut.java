@@ -4,17 +4,37 @@
  */
 package ecommerce.system;
 
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author elmnshawy
  */
 public class CheckOut extends javax.swing.JFrame {
 
+    static Order order  ; 
     /**
      * Creates new form CheckOut
      */
+    private DefaultTableModel model;
+    Customer c  ;
+   
+
     public CheckOut() {
         initComponents();
+        c = Customer.current_customer;
+        label_name.setText(c.getName());
+        label_name1.setText(c.getEmail()); 
+        label_name2.setText(c.getAddress());
+        model = (DefaultTableModel) jTable_items.getModel();
+        CartManager CM = CartManager.getInstance();
+        fillFromCart(CM.getCartItems()); 
+        
+        
+        
+
     }
 
     /**
@@ -190,6 +210,11 @@ public class CheckOut extends javax.swing.JFrame {
 
         bt_confirmorder.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         bt_confirmorder.setText("Confirm Order");
+        bt_confirmorder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_confirmorderActionPerformed(evt);
+            }
+        });
 
         label_name.setBackground(new java.awt.Color(255, 255, 255));
         label_name.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -306,6 +331,16 @@ public class CheckOut extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void fillFromCart(List<CartItem> items) {
+    model.setRowCount(0); // clear table
+    for (CartItem item : items) {
+        model.addRow(new Object[]{
+            item.getProduct().getName(),
+            item.getQuantity() , 
+            item.getProduct().getPrice()
+        });
+    }
+}
     private void MyAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MyAccountActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_MyAccountActionPerformed
@@ -330,13 +365,47 @@ public class CheckOut extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_rb_standardActionPerformed
 
-    private void rb_creditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb_creditActionPerformed
+    public String getDeliveryType() {
+        if (rb_express.isSelected())
+            return "Express";
+        return "Standard";
+    }
+
+    public String getPaymentMethod() {
+        if (rb_credit.isSelected())
+            return "Credit Card";
+        return "PayPal";
+    }
+    
+    private void bt_confirmorderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_confirmorderActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_rb_creditActionPerformed
+        
+        String deliveryType = getDeliveryType();
+        String paymentMethod = getPaymentMethod();
+
+         order = new OrderBuilder()
+        .setCustomer(c)
+        .setShippingAddress(c.getAddress())
+        .setDeliveryType(deliveryType)
+        .setPaymentMethod(paymentMethod)
+        .build();
+        
+        
+         this.dispose();
+         new CheckFrame().setVisible(true);
+        
+        
+       
+        
+    }//GEN-LAST:event_bt_confirmorderActionPerformed
 
     private void rb_paypalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb_paypalActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rb_paypalActionPerformed
+
+    private void rb_creditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb_creditActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rb_creditActionPerformed
 
     /**
      * @param args the command line arguments
